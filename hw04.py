@@ -65,12 +65,14 @@ def planet(mass):
     """Construct a planet of some mass."""
     assert mass > 0
     "*** YOUR CODE HERE ***"
+    return ['planet', mass]
 
 
 def mass(w):
     """Select the mass of a planet."""
     assert is_planet(w), 'must call mass on a planet'
     "*** YOUR CODE HERE ***"
+    return w[1]
 
 
 def is_planet(w):
@@ -127,7 +129,15 @@ def balanced(m):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    if is_planet(m):
+        return True
+    else:
+        l_end = end(left(m))
+        r_end = end(right(m))
+        l_torque = length(left(m)) * total_weight(left(m))
+        r_torque = length(right(m)) * total_weight(right(m))
+        return balanced(left(m)) and balanced(right(m)) and l_torque == r_torque
+         
 
 def totals_tree(m):
     """Return a tree representing the mobile with its total weight at the root.
@@ -159,6 +169,7 @@ def totals_tree(m):
     True
     """
     "*** YOUR CODE HERE ***"
+    return total_weight(m)
 
 
 def replace_loki_at_leaf(t, lokis_replacement):
@@ -191,7 +202,8 @@ def replace_loki_at_leaf(t, lokis_replacement):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    if t == lokis_replacement:
+        return lokis_replacement
 
 def has_path(t, word):
     """Return whether there is a path in a tree where the entries along the path
@@ -225,7 +237,12 @@ def has_path(t, word):
     """
     assert len(word) > 0, 'no path for empty word.'
     "*** YOUR CODE HERE ***"
-
+    n = 0
+    while word[n] <= len(word):
+        if t == word[n]:
+            return True
+        n += 1
+    return False
 
 def str_interval(x):
     """Return a string representation of interval x."""
